@@ -1,4 +1,4 @@
-class RestaurantItem {
+class Restaurant {
   title: string
   image: string
   rate: number
@@ -23,4 +23,4 @@ class RestaurantItem {
   }
 }
 
-export default RestaurantItem
+export default Restaurant

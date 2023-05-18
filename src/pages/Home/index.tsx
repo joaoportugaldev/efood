@@ -1,11 +1,11 @@
 import Header from '../../components/Header'
-import RestaurantsList from '../../components/RestaurantList'
+import List from '../../components/List'
 import image1 from '../../assets/images/imagem.png'
 import image2 from '../../assets/images/image2.png'
-import RestaurantItem from '../../models/Restaurant'
+import Restaurant from '../../models/Restaurant'
 import Footer from '../../components/Footer'
 
-const restaurantes: RestaurantItem[] = [
+const restaurantes: Restaurant[] = [
   {
     id: 1,
     title: 'Hioki Sushi',
@@ -29,7 +29,7 @@ const restaurantes: RestaurantItem[] = [
 const Home = () => (
   <>
     <Header />
-    <RestaurantsList restaurants={restaurantes} />
+    <List type="restaurant" restaurants={restaurantes} />
     <Footer />
   </>
 )

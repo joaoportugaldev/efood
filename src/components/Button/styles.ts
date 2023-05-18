@@ -19,4 +19,7 @@ export const ButtonContainer = styled.button`
   font-size: 14px;
   font-weight: bold;
   padding: 4px;
+  cursor: pointer;
+  border: none;
+  width: 100%;
 `
