@@ -2,7 +2,7 @@ import logo from '../../assets/images/logo.svg'
 import bgImage from '../../assets/images/bg.png'
 import { HeaderContainer, Title } from './styles'
 
-export const Header = () => (
+const Header = () => (
   <HeaderContainer style={{ backgroundImage: `url(${bgImage})` }}>
     <img src={logo} alt="Logo" />
     <Title>
@@ -12,3 +12,5 @@ export const Header = () => (
     </Title>
   </HeaderContainer>
 )
+
+export default Header

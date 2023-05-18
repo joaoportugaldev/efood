@@ -5,7 +5,7 @@ type ImageProps = {
   imageURL: string
 }
 
-export const Card = styled.div`
+export const Card = styled.li`
   background-color: ${colors.branco};
 `
 

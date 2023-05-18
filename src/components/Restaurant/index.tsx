@@ -20,7 +20,13 @@ type Props = {
   infos: string[]
 }
 
-export const Product = ({ title, image, rate, description, infos }: Props) => (
+export const Restaurant = ({
+  title,
+  image,
+  rate,
+  description,
+  infos
+}: Props) => (
   <Card>
     <Image imageURL={image}>
       <TagContainer>
@@ -40,7 +46,7 @@ export const Product = ({ title, image, rate, description, infos }: Props) => (
         </RateContainer>
       </div>
       <Description>{description}</Description>
-      <Button title="Saiba mais" to="#" type="link">
+      <Button title="Saiba mais" to="/restaurantes" type="link">
         Saiba mais
       </Button>
     </AboutContainer>
