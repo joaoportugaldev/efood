@@ -27,6 +27,27 @@ const menu: Dish[] = [
     description:
       'A clássica Mamma Quaresma: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     image: marguerita
+  },
+  {
+    id: 4,
+    title: 'Pizza Mamma Quaresma',
+    description:
+      'A clássica Mamma Quaresma: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    image: marguerita
+  },
+  {
+    id: 5,
+    title: 'Pizza Mamma Quaresma',
+    description:
+      'A clássica Mamma Quaresma: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    image: marguerita
+  },
+  {
+    id: 6,
+    title: 'Pizza Mamma Quaresma',
+    description:
+      'A clássica Mamma Quaresma: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    image: marguerita
   }
 ]
 
