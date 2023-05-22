@@ -33,6 +33,10 @@ const Home = () => {
       .then((res) => setRestaurantes(res))
   }, [])
 
+  if (!restaurantes) {
+    return <h3>Carregando...</h3>
+  }
+
   return (
     <>
       <Header />

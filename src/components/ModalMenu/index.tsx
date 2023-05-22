@@ -8,6 +8,7 @@ export type ModalProps = {
   description: string
   isVisible: boolean
   porcao: string
+  price: string
   onClose: () => void
 }
 
@@ -17,6 +18,7 @@ const ModalMenu = ({
   description,
   isVisible,
   porcao,
+  price,
   onClose
 }: ModalProps) => (
   <S.Modal isVisible={isVisible}>
@@ -30,9 +32,7 @@ const ModalMenu = ({
         <p>{description}</p>
         <p>{porcao}</p>
         <Button title="Adicionar" type="button" width="fit">
-          <span>
-            Adicionar ao Carrinho - <span>R$60,90</span>
-          </span>
+          {`Adicionar ao Carrinho - ${price}`}
         </Button>
       </S.About>
     </S.Box>

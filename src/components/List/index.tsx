@@ -22,8 +22,16 @@ const List = ({ restaurantes, type, menu }: Props) => {
     image: '',
     description: '',
     porcao: '',
+    price: '',
     isVisible: false
   })
+
+  const formataPreco = (preco: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(preco)
+  }
 
   const getRestauranteTags = (infos: string) => {
     const tags = []
@@ -67,6 +75,7 @@ const List = ({ restaurantes, type, menu }: Props) => {
                         image: prato.foto,
                         description: prato.descricao,
                         porcao: prato.porcao,
+                        price: formataPreco(prato.preco),
                         isVisible: true
                       })
                     }
@@ -83,6 +92,7 @@ const List = ({ restaurantes, type, menu }: Props) => {
             image: '',
             description: '',
             porcao: '',
+            price: '',
             isVisible: false
           })
         }
@@ -90,6 +100,7 @@ const List = ({ restaurantes, type, menu }: Props) => {
         image={modal.image}
         description={modal.description}
         porcao={`Serve ${modal.porcao}`}
+        price={modal.price}
       />
     </>
   )
