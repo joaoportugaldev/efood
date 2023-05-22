@@ -11,6 +11,7 @@ export type Props = {
   rate?: number
   description: string
   infos?: string[]
+  onClick?: () => void
 }
 
 export const Card = ({
@@ -19,10 +20,15 @@ export const Card = ({
   image,
   rate,
   description,
-  infos
+  infos,
+  onClick
 }: Props) => (
   <S.Card type={type}>
-    <S.Image type={type} style={{ backgroundImage: `url(${image})` }}>
+    <S.Image
+      type={type}
+      style={{ backgroundImage: `url(${image})` }}
+      onClick={onClick}
+    >
       {type === 'restaurant' && (
         <S.Tags>
           {infos?.map((info) => (
@@ -41,7 +47,7 @@ export const Card = ({
           </S.Rate>
         </S.Header>
       ) : (
-        <S.Title>{title}</S.Title>
+        <S.Title onClick={onClick}>{title}</S.Title>
       )}
       <S.Description>{description}</S.Description>
       {type === 'restaurant' ? (

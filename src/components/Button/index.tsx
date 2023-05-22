@@ -1,17 +1,30 @@
 import { ButtonContainer, ButtonLink } from './styles'
 
-type Props = {
+export type Props = {
   type: 'button' | 'link'
   title: string
   to?: string
   onClick?: () => void
-  children: string
+  children: string | JSX.Element
+  width?: 'full' | 'fit'
 }
 
-export const Button = ({ type, title, to, onClick, children }: Props) => {
+export const Button = ({
+  type,
+  title,
+  to,
+  onClick,
+  children,
+  width = 'full'
+}: Props) => {
   if (type === 'button') {
     return (
-      <ButtonContainer type="button" title={title} onClick={onClick}>
+      <ButtonContainer
+        type="button"
+        title={title}
+        onClick={onClick}
+        width={width}
+      >
         {children}
       </ButtonContainer>
     )

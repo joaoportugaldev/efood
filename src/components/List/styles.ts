@@ -16,7 +16,7 @@ export const List = styled.section<ListProps>`
   background-color: transparent;
 `
 
-export const SectionContainer = styled.div`
+export const Section = styled.div`
   max-width: 100vw;
   width: 100%;
   background-color: ${colors.skin};
