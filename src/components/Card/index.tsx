@@ -12,6 +12,7 @@ export type Props = {
   description: string
   infos?: string[]
   onClick?: () => void
+  id: number
 }
 
 export const Card = ({
@@ -21,44 +22,54 @@ export const Card = ({
   rate,
   description,
   infos,
-  onClick
-}: Props) => (
-  <S.Card type={type}>
-    <S.Image
-      type={type}
-      style={{ backgroundImage: `url(${image})` }}
-      onClick={onClick}
-    >
-      {type === 'restaurant' && (
-        <S.Tags>
-          {infos?.map((info) => (
-            <Tag key={info}>{info}</Tag>
-          ))}
-        </S.Tags>
-      )}
-    </S.Image>
-    <S.AboutContainer>
-      {type === 'restaurant' ? (
-        <S.Header>
+  onClick,
+  id
+}: Props) => {
+  const getDescricao = (descricao: string) => {
+    if (descricao.length > 132) {
+      return descricao.slice(0, 129) + '...'
+    }
+    return descricao
+  }
+
+  return (
+    <S.Card type={type} onClick={onClick}>
+      <S.Image type={type} style={{ backgroundImage: `url(${image})` }}>
+        {type === 'restaurant' && (
+          <S.Tags>
+            {infos?.map((info) => (
+              <Tag key={info}>{info}</Tag>
+            ))}
+          </S.Tags>
+        )}
+      </S.Image>
+      <S.AboutContainer>
+        {type === 'restaurant' ? (
+          <S.Header>
+            <S.Title>{title}</S.Title>
+            <S.Rate>
+              <S.Title>{rate}</S.Title>
+              <img src={star} alt="Estrela" />
+            </S.Rate>
+          </S.Header>
+        ) : (
           <S.Title>{title}</S.Title>
-          <S.Rate>
-            <S.Title>{rate}</S.Title>
-            <img src={star} alt="Estrela" />
-          </S.Rate>
-        </S.Header>
-      ) : (
-        <S.Title onClick={onClick}>{title}</S.Title>
-      )}
-      <S.Description>{description}</S.Description>
-      {type === 'restaurant' ? (
-        <Button title="Saiba mais" to="/menu" type="link">
-          Saiba mais
-        </Button>
-      ) : (
-        <Button title="Adicionar" type="button">
-          Adicionar ao Carrinho
-        </Button>
-      )}
-    </S.AboutContainer>
-  </S.Card>
-)
+        )}
+        {type === 'restaurant' ? (
+          <S.Description>{description}</S.Description>
+        ) : (
+          <S.Description>{getDescricao(description)}</S.Description>
+        )}
+        {type === 'restaurant' ? (
+          <Button title="Saiba mais" to={`/menu/${id}`} type="link">
+            Saiba mais
+          </Button>
+        ) : (
+          <Button title="Adicionar" type="button">
+            Adicionar ao Carrinho
+          </Button>
+        )}
+      </S.AboutContainer>
+    </S.Card>
+  )
+}

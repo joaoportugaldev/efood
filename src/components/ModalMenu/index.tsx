@@ -2,11 +2,12 @@ import { Button } from '../Button'
 import * as S from './styles'
 import close from '../../assets/images/close.svg'
 
-export type Props = {
+export type ModalProps = {
   title: string
   image: string
   description: string
   isVisible: boolean
+  porcao: string
   onClose: () => void
 }
 
@@ -15,8 +16,9 @@ const ModalMenu = ({
   image,
   description,
   isVisible,
+  porcao,
   onClose
-}: Props) => (
+}: ModalProps) => (
   <S.Modal isVisible={isVisible}>
     <S.Box className="container">
       <S.Close onClick={onClose}>
@@ -26,6 +28,7 @@ const ModalMenu = ({
       <S.About>
         <h3>{title}</h3>
         <p>{description}</p>
+        <p>{porcao}</p>
         <Button title="Adicionar" type="button" width="fit">
           <span>
             Adicionar ao Carrinho - <span>R$60,90</span>

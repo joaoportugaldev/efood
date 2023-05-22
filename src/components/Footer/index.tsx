@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { StyledFooter } from './styles'
 import logo from '../../assets/images/logo.svg'
 import twitter from '../../assets/images/twitter.svg'
@@ -6,7 +8,10 @@ import facebook from '../../assets/images/facebook.svg'
 
 const Footer = () => (
   <StyledFooter>
-    <img src={logo} alt="logo" />
+    <Link to={'/'}>
+      <img src={logo} alt="logo" />
+    </Link>
+
     <ul>
       <li>
         <img src={instagram} alt="instagram" />

@@ -1,66 +1,95 @@
 import { useState } from 'react'
 
+import { Restaurante } from '../../pages/Home'
+import { ModalProps } from '../ModalMenu'
+
 import { Card } from '../Card'
 import * as S from './styles'
-import Restaurant from '../../models/Restaurant'
-import Dish from '../../models/Dish'
-import pizza from '../../assets/images/marguerita.png'
+import { Prato } from '../../pages/Home'
 import ModalMenu from '../ModalMenu'
 
 export type Props = {
   type: 'restaurant' | 'menu'
-  restaurants?: Restaurant[]
-  menu?: Dish[]
+  restaurantes?: Restaurante[]
+  menu?: Prato[]
 }
 
-const List = ({ restaurants, type, menu }: Props) => {
-  const [modalIsOpened, setModalIsOpened] = useState(false)
-  const [modalUrl, setModalUrl] = useState('')
+type ModalState = Omit<ModalProps, 'onClose'>
+
+const List = ({ restaurantes, type, menu }: Props) => {
+  const [modal, setModal] = useState<ModalState>({
+    title: '',
+    image: '',
+    description: '',
+    porcao: '',
+    isVisible: false
+  })
+
+  const getRestauranteTags = (infos: string) => {
+    const tags = []
+
+    if (infos.length) {
+      tags.push(infos)
+    }
+
+    return tags
+  }
 
   return (
     <>
       <S.Section>
         <S.List type={type} className="container">
           {type === 'restaurant'
-            ? restaurants?.map((restaurant) => (
-                <Card
-                  type="restaurant"
-                  key={restaurant.id}
-                  title={restaurant.title}
-                  image={restaurant.image}
-                  rate={restaurant.rate}
-                  description={restaurant.description}
-                  infos={restaurant.infos}
-                />
+            ? restaurantes?.map((restaurante) => (
+                <li key={restaurante.id}>
+                  <Card
+                    id={restaurante.id}
+                    type="restaurant"
+                    title={restaurante.titulo}
+                    image={restaurante.capa}
+                    rate={restaurante.avaliacao}
+                    description={restaurante.descricao}
+                    infos={getRestauranteTags(restaurante.tipo)}
+                  />
+                </li>
               ))
-            : menu?.map((dish) => (
-                <Card
-                  type="dish"
-                  key={dish.id}
-                  title={dish.title}
-                  image={dish.image}
-                  description={dish.description}
-                  onClick={() => setModalIsOpened(true)}
-                />
+            : menu?.map((prato) => (
+                <li key={prato.id}>
+                  <Card
+                    id={prato.id}
+                    type="dish"
+                    title={prato.nome}
+                    image={prato.foto}
+                    description={prato.descricao}
+                    onClick={() =>
+                      setModal({
+                        title: prato.nome,
+                        image: prato.foto,
+                        description: prato.descricao,
+                        porcao: prato.porcao,
+                        isVisible: true
+                      })
+                    }
+                  />
+                </li>
               ))}
         </S.List>
       </S.Section>
       <ModalMenu
-        isVisible={modalIsOpened}
-        onClose={() => setModalIsOpened(false)}
-        title="Pizza Marguerita"
-        image={pizza}
-        description="A pizza Margherita é uma pizza clássica da culinária italiana,
-      reconhecida por sua simplicidade e sabor inigualável. Ela é feita com uma
-      base de massa fina e crocante, coberta com molho de tomate fresco,
-      queijo mussarela de alta qualidade, manjericão fresco e azeite de oliva extra-virgem.
-      A combinação de sabores é perfeita, com o molho de tomate suculento e ligeiramente ácido,
-      o queijo derretido e cremoso e as folhas de manjericão frescas, que adicionam um toque de
-      sabor herbáceo.
-      É uma pizza simples, mas deliciosa, que agrada a todos os paladares e é
-      uma ótima opção para qualquer ocasião.
-
-      Serve de 2 a 3 pessoas"
+        isVisible={modal.isVisible}
+        onClose={() =>
+          setModal({
+            title: '',
+            image: '',
+            description: '',
+            porcao: '',
+            isVisible: false
+          })
+        }
+        title={modal.title}
+        image={modal.image}
+        description={modal.description}
+        porcao={`Serve ${modal.porcao}`}
       />
     </>
   )

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
-import { Props } from '.'
+import { ModalProps as P } from '.'
 
-type ModalProps = Pick<Props, 'isVisible'>
+type ModalProps = Pick<P, 'isVisible'>
 
 export const Modal = styled.div<ModalProps>`
   position: fixed;

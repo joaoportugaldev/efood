@@ -14,6 +14,10 @@ export const List = styled.section<ListProps>`
   padding-top: 80px;
   padding-bottom: 120px;
   background-color: transparent;
+
+  li {
+    background-color: ${colors.vermelho};
+  }
 `
 
 export const Section = styled.div`

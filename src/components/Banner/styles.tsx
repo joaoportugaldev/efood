@@ -28,6 +28,7 @@ export const Container = styled.div<Props>`
 export const Category = styled.h3`
   margin-top: 28px;
   font-weight: lighter;
+  text-transform: capitalize;
 `
 
 export const Title = styled.h2`

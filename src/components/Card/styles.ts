@@ -4,11 +4,15 @@ import { Props } from '.'
 
 type CardProps = Pick<Props, 'type'>
 
-export const Card = styled.li<CardProps>`
+export const Card = styled.div<CardProps>`
   background-color: ${(props) =>
     props.type === 'restaurant' ? `${colors.branco}` : `${colors.vermelho}`};
   color: ${(props) =>
     props.type === 'restaurant' ? `${colors.vermelho}` : `${colors.pessego}`};
+  cursor: ${(props) => (props.type === 'restaurant' ? 'auto' : 'pointer')};
+
+  max-height: ${(props) => (props.type === 'restaurant' ? '500px' : 'auto')};
+  height: 100%;
 `
 
 export const Image = styled.div<CardProps>`
@@ -25,6 +29,7 @@ export const AboutContainer = styled.div`
   padding: 8px;
   border: 1px solid ${colors.vermelho};
   border-top-width: 0;
+  height: calc(100% - 217px);
 `
 
 export const Header = styled.div`

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import logo from '../../assets/images/logo.svg'
 import bgImage from '../../assets/images/bg.png'
 import { HeaderContainer, HeaderLink, Cart } from './styles'
@@ -7,7 +8,9 @@ const HeaderMenu = () => (
     <div className="container">
       <nav>
         <HeaderLink to={'/'}>Restaurantes</HeaderLink>
-        <img src={logo} alt="Logo" />
+        <Link to={'/'}>
+          <img src={logo} alt="Logo" />
+        </Link>
         <Cart>
           <span>0 produto(s) no carrinho</span>
         </Cart>

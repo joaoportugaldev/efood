@@ -1,67 +1,36 @@
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+
+import { Prato, Restaurante } from '../Home'
 import { Banner } from '../../components/Banner'
 import Footer from '../../components/Footer'
 import HeaderMenu from '../../components/HeaderMenu'
-import image1 from '../../assets/images/imagem.png'
-import Dish from '../../models/Dish'
-import marguerita from '../../assets/images/marguerita.png'
+
 import List from '../../components/List'
 
-const menu: Dish[] = [
-  {
-    id: 1,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 2,
-    title: 'Pizza 4 Queijos',
-    description:
-      'A clássica 4 Queijos: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 3,
-    title: 'Pizza Mamma Quaresma',
-    description:
-      'A clássica Mamma Quaresma: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 4,
-    title: 'Pizza Mamma Quaresma',
-    description:
-      'A clássica Mamma Quaresma: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 5,
-    title: 'Pizza Mamma Quaresma',
-    description:
-      'A clássica Mamma Quaresma: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 6,
-    title: 'Pizza Mamma Quaresma',
-    description:
-      'A clássica Mamma Quaresma: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  }
-]
+const Menu = () => {
+  const { id } = useParams()
 
-const Menu = () => (
-  <section>
-    <HeaderMenu />
-    <Banner
-      title="La Dolce Vita Trattoria"
-      category="Italiana"
-      bgImage={image1}
-    />
-    <List type="menu" menu={menu} />
-    <Footer />
-  </section>
-)
+  const [menu, setMenu] = useState<Restaurante>()
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+      .then((res) => res.json())
+      .then((res) => setMenu(res))
+  }, [id])
+
+  if (!menu) {
+    return <h3>Carregando...</h3>
+  }
+
+  return (
+    <section>
+      <HeaderMenu />
+      <Banner title={menu.titulo} category={menu.tipo} bgImage={menu.capa} />
+      <List type="menu" menu={menu.cardapio} />
+      <Footer />
+    </section>
+  )
+}
 
 export default Menu
