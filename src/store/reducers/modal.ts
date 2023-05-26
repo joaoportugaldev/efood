@@ -3,19 +3,13 @@ import { ModalProps } from '../../components/ModalMenu'
 import { Prato } from '../../pages/Home'
 
 const initialState: ModalProps = {
-  title: '',
-  image: '',
-  description: '',
+  nome: '',
+  descricao: '',
+  foto: '',
+  id: 0,
+  preco: 0,
   porcao: '',
-  price: '',
   isOpen: false
-}
-
-const formataPreco = (preco: number) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
 }
 
 const modalSlice = createSlice({
@@ -23,17 +17,17 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     openModal: (state, action: PayloadAction<Prato>) => {
-      state.title = action.payload.nome
-      state.image = action.payload.foto
-      state.description = action.payload.descricao
+      state.nome = action.payload.nome
+      state.foto = action.payload.foto
+      state.descricao = action.payload.descricao
       state.porcao = action.payload.porcao
-      state.price = formataPreco(action.payload.preco)
+      state.preco = action.payload.preco
       state.isOpen = true
     },
     closeModal: (state) => {
-      state.title = ''
-      state.image = ''
-      state.description = ''
+      state.nome = ''
+      state.foto = ''
+      state.descricao = ''
       state.porcao = ''
       state.isOpen = false
     }

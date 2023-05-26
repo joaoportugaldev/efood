@@ -39,6 +39,7 @@ export const Item = styled.li`
   color: ${colors.vermelho};
   display: flex;
   font-size: 14px;
+  margin-top: 16px;
 
   button {
     border: none;

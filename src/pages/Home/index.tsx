@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 
 import { useGetRestaurantesQuery } from '../../services/api'
 
-export type Prato = {
+export interface Prato {
   foto: string
   preco: number
   id: number

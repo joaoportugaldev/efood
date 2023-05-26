@@ -1,19 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import { closeModal as close } from '../../store/reducers/modal'
-import { open } from '../../store/reducers/cart'
+import { add, open } from '../../store/reducers/cart'
+import { Prato } from '../../pages/Home'
+import { formataPreco } from '../../utils'
 
 import { Button } from '../Button'
 import * as S from './styles'
 import closeIcon from '../../assets/images/close.svg'
 import { RootReducer } from '../../store'
 
-export type ModalProps = {
-  title: string
-  image: string
-  description: string
-  porcao: string
-  price: string
+export interface ModalProps extends Prato {
   isOpen: boolean
 }
 
@@ -22,11 +19,16 @@ const ModalMenu = () => {
   const openCart = () => dispatch(open())
   const closeModal = () => dispatch(close())
 
-  const { title, image, description, porcao, price, isOpen } = useSelector(
+  const { nome, foto, descricao, porcao, preco, isOpen } = useSelector(
     (state: RootReducer) => state.modal
   )
 
+  const prato = useSelector((state: RootReducer) => state.modal)
+
+  const addToCart = () => dispatch(add(prato))
+
   const handleClick = () => {
+    addToCart()
     openCart()
     closeModal()
   }
@@ -41,10 +43,10 @@ const ModalMenu = () => {
         >
           <img src={closeIcon} alt="Botao de fechar" />
         </S.Close>
-        <img src={image} />
+        <img src={foto} />
         <S.About>
-          <h3>{title}</h3>
-          <p>{description}</p>
+          <h3>{nome}</h3>
+          <p>{descricao}</p>
           <p>{porcao}</p>
           <Button
             title="Adicionar"
@@ -54,7 +56,7 @@ const ModalMenu = () => {
             }}
             width="fit"
           >
-            {`Adicionar ao Carrinho - ${price}`}
+            {`Adicionar ao Carrinho - ${formataPreco(preco)}`}
           </Button>
         </S.About>
       </S.Box>

@@ -30,4 +30,5 @@ export const Cart = styled.div`
   color: ${colors.vermelho};
   font-size: 18px;
   font-weight: 900;
+  cursor: pointer;
 `

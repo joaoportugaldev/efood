@@ -1,38 +1,44 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
-import { open, close } from '../../store/reducers/cart'
+import { close, remove } from '../../store/reducers/cart'
+import { getTotalPrice } from '../../utils'
 
 import { Button } from '../Button'
 import { CartContainer, Sidebar, Item, Imagem, Price } from './styles'
-import marguerita from '../../assets/images/marguerita.png'
+
 import lixeira from '../../assets/images/lixeira.svg'
+import { formataPreco } from '../../utils'
 
 const Cart = () => {
   const { isOpen } = useSelector((state: RootReducer) => state.cart)
+  const { items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
 
   const closeCart = () => dispatch(close())
+  const removeItem = (id: number) => dispatch(remove(id))
 
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <div className="overlay" onClick={() => closeCart()}></div>
       <Sidebar>
         <ul>
-          <Item>
-            <Imagem src={marguerita} alt="Pizza de Marguerita" />
-            <div>
-              <h4>Pizza Marguerita</h4>
-              <p>R$60,90</p>
-            </div>
-            <button type="button">
-              <img src={lixeira} alt="Botão de exluir produto" />
-            </button>
-          </Item>
+          {items.map((item) => (
+            <Item key={item.nome}>
+              <Imagem src={item.foto} alt="Pizza de Marguerita" />
+              <div>
+                <h4>{item.nome}</h4>
+                <p>{formataPreco(item.preco)}</p>
+              </div>
+              <button type="button" onClick={() => removeItem(item.id)}>
+                <img src={lixeira} alt="Botão de exluir produto" />
+              </button>
+            </Item>
+          ))}
         </ul>
         <Price>
           <span>Valor Total</span>
-          <span>R$192,00</span>
+          <span>{formataPreco(getTotalPrice(items))}</span>
         </Price>
         <Button
           type="button"

@@ -53,6 +53,7 @@ const List = ({ restaurantes, type, menu }: Props) => {
                 <li key={prato.id}>
                   <Card
                     id={prato.id}
+                    prato={prato}
                     type="dish"
                     title={prato.nome}
                     image={prato.foto}

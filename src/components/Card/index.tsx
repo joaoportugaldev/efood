@@ -1,14 +1,16 @@
 import { useDispatch } from 'react-redux'
 
 import { Button } from '../Button'
-import { open } from '../../store/reducers/cart'
+import { add, open } from '../../store/reducers/cart'
 
 import star from '../../assets/images/estrela.svg'
 import { Tag } from '../Tag'
 import * as S from './styles'
+import { Prato } from '../../pages/Home'
 
 export type Props = {
   type: 'restaurant' | 'dish'
+  prato?: Prato
   title: string
   image: string
   rate?: number
@@ -20,6 +22,7 @@ export type Props = {
 
 export const Card = ({
   type,
+  prato,
   title,
   image,
   rate,
@@ -30,6 +33,11 @@ export const Card = ({
 }: Props) => {
   const dispatch = useDispatch()
   const openCart = () => dispatch(open())
+  const addToCart = () => {
+    if (prato) {
+      dispatch(add(prato))
+    }
+  }
 
   const getDescricao = (descricao: string) => {
     if (descricao.length > 132) {
@@ -85,6 +93,7 @@ export const Card = ({
             type="button"
             onClick={() => {
               openCart()
+              addToCart()
             }}
           >
             Adicionar ao Carrinho
