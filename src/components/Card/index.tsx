@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux'
+
 import { Button } from '../Button'
 import { open } from '../../store/reducers/cart'
 
@@ -37,8 +38,17 @@ export const Card = ({
     return descricao
   }
 
+  const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const isButtonClick = (event.target as HTMLElement).closest('button')
+    if (!isButtonClick) {
+      if (onClick) {
+        onClick()
+      }
+    }
+  }
+
   return (
-    <S.Card type={type} onClick={onClick}>
+    <S.Card type={type} onClick={handleCardClick}>
       <S.Image type={type} style={{ backgroundImage: `url(${image})` }}>
         {type === 'restaurant' && (
           <S.Tags>
@@ -70,7 +80,13 @@ export const Card = ({
             Saiba mais
           </Button>
         ) : (
-          <Button title="Adicionar" type="button" onClick={() => openCart()}>
+          <Button
+            title="Adicionar"
+            type="button"
+            onClick={() => {
+              openCart()
+            }}
+          >
             Adicionar ao Carrinho
           </Button>
         )}

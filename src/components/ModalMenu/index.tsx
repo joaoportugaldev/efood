@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { closeModal } from '../../store/reducers/modal'
+import { closeModal as close } from '../../store/reducers/modal'
+import { open } from '../../store/reducers/cart'
 
 import { Button } from '../Button'
 import * as S from './styles'
@@ -18,12 +19,16 @@ export type ModalProps = {
 
 const ModalMenu = () => {
   const dispatch = useDispatch()
+  const openCart = () => dispatch(open())
+  const closeModal = () => dispatch(close())
+
   const { title, image, description, porcao, price, isOpen } = useSelector(
     (state: RootReducer) => state.modal
   )
 
   const handleClick = () => {
-    dispatch(closeModal())
+    openCart()
+    closeModal()
   }
 
   return (
@@ -31,7 +36,7 @@ const ModalMenu = () => {
       <S.Box className="container">
         <S.Close
           onClick={() => {
-            handleClick()
+            closeModal()
           }}
         >
           <img src={closeIcon} alt="Botao de fechar" />
@@ -41,7 +46,14 @@ const ModalMenu = () => {
           <h3>{title}</h3>
           <p>{description}</p>
           <p>{porcao}</p>
-          <Button title="Adicionar" type="button" width="fit">
+          <Button
+            title="Adicionar"
+            type="button"
+            onClick={() => {
+              handleClick()
+            }}
+            width="fit"
+          >
             {`Adicionar ao Carrinho - ${price}`}
           </Button>
         </S.About>
@@ -49,7 +61,7 @@ const ModalMenu = () => {
       <div
         className="overlay"
         onClick={() => {
-          handleClick()
+          closeModal()
         }}
       ></div>
     </S.Modal>
