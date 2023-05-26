@@ -1,12 +1,12 @@
-import { useState } from 'react'
-
 import { Restaurante } from '../../pages/Home'
-import { ModalProps } from '../ModalMenu'
+
+import { openModal } from '../../store/reducers/modal'
 
 import { Card } from '../Card'
 import * as S from './styles'
 import { Prato } from '../../pages/Home'
 import ModalMenu from '../ModalMenu'
+import { useDispatch } from 'react-redux'
 
 export type Props = {
   type: 'restaurant' | 'menu'
@@ -14,24 +14,8 @@ export type Props = {
   menu?: Prato[]
 }
 
-type ModalState = Omit<ModalProps, 'onClose'>
-
 const List = ({ restaurantes, type, menu }: Props) => {
-  const [modal, setModal] = useState<ModalState>({
-    title: '',
-    image: '',
-    description: '',
-    porcao: '',
-    price: '',
-    isVisible: false
-  })
-
-  const formataPreco = (preco: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
-  }
+  const dispatch = useDispatch()
 
   const getRestauranteTags = (infos: string) => {
     const tags = []
@@ -41,6 +25,10 @@ const List = ({ restaurantes, type, menu }: Props) => {
     }
 
     return tags
+  }
+
+  const setModal = (prato: Prato) => {
+    dispatch(openModal(prato))
   }
 
   return (
@@ -69,39 +57,13 @@ const List = ({ restaurantes, type, menu }: Props) => {
                     title={prato.nome}
                     image={prato.foto}
                     description={prato.descricao}
-                    onClick={() =>
-                      setModal({
-                        title: prato.nome,
-                        image: prato.foto,
-                        description: prato.descricao,
-                        porcao: prato.porcao,
-                        price: formataPreco(prato.preco),
-                        isVisible: true
-                      })
-                    }
+                    onClick={() => setModal(prato)}
                   />
                 </li>
               ))}
         </S.List>
       </S.Section>
-      <ModalMenu
-        isVisible={modal.isVisible}
-        onClose={() =>
-          setModal({
-            title: '',
-            image: '',
-            description: '',
-            porcao: '',
-            price: '',
-            isVisible: false
-          })
-        }
-        title={modal.title}
-        image={modal.image}
-        description={modal.description}
-        porcao={`Serve ${modal.porcao}`}
-        price={modal.price}
-      />
+      <ModalMenu />
     </>
   )
 }

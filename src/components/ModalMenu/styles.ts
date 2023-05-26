@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 import { ModalProps as P } from '.'
 
-type ModalProps = Pick<P, 'isVisible'>
+type ModalProps = Pick<P, 'isOpen'>
 
 export const Modal = styled.div<ModalProps>`
   position: fixed;
@@ -12,7 +12,7 @@ export const Modal = styled.div<ModalProps>`
   height: 100%;
   z-index: 1;
 
-  display: ${(props) => (props.isVisible ? 'flex' : 'none')};
+  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
 
   align-items: center;
   justify-content: center;

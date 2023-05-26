@@ -1,4 +1,6 @@
+import { useDispatch } from 'react-redux'
 import { Button } from '../Button'
+import { open } from '../../store/reducers/cart'
 
 import star from '../../assets/images/estrela.svg'
 import { Tag } from '../Tag'
@@ -25,6 +27,9 @@ export const Card = ({
   onClick,
   id
 }: Props) => {
+  const dispatch = useDispatch()
+  const openCart = () => dispatch(open())
+
   const getDescricao = (descricao: string) => {
     if (descricao.length > 132) {
       return descricao.slice(0, 129) + '...'
@@ -65,7 +70,7 @@ export const Card = ({
             Saiba mais
           </Button>
         ) : (
-          <Button title="Adicionar" type="button">
+          <Button title="Adicionar" type="button" onClick={() => openCart()}>
             Adicionar ao Carrinho
           </Button>
         )}
