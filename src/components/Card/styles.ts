@@ -1,18 +1,24 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { Props } from '.'
+import { ButtonLink } from '../Button/styles'
 
 type CardProps = Pick<Props, 'type'>
 
 export const Card = styled.div<CardProps>`
+  position: relative;
   background-color: ${(props) =>
     props.type === 'restaurant' ? `${colors.branco}` : `${colors.vermelho}`};
   color: ${(props) =>
     props.type === 'restaurant' ? `${colors.vermelho}` : `${colors.pessego}`};
   cursor: ${(props) => (props.type === 'restaurant' ? 'auto' : 'pointer')};
-
-  max-height: ${(props) => (props.type === 'restaurant' ? '500px' : 'auto')};
   height: 100%;
+
+  ${ButtonLink} {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+  }
 `
 
 export const Image = styled.div<CardProps>`
@@ -46,7 +52,7 @@ export const Description = styled.p`
   font-size: 14px;
   line-height: 22px;
   font-weight: 400;
-  margin: 16px 0px;
+  margin: 40px 0px;
 `
 
 export const Tags = styled.div`

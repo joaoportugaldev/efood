@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 import { Props } from '.'
 
@@ -17,6 +17,15 @@ export const List = styled.section<ListProps>`
 
   li {
     background-color: ${colors.vermelho};
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: ${() => '1fr 1fr'};
+    gap: 20px;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    grid-template-columns: ${() => '1fr'};
   }
 `
 

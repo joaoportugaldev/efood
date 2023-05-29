@@ -8,6 +8,11 @@ export const colors = {
   skin: '#fff8f2'
 }
 
+export const breakpoints = {
+  mobile: '767px',
+  tablet: '1023px'
+}
+
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
@@ -26,5 +31,9 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 1024px;
     width: 100%;
     margin: 0 auto;
+
+    @media(max-width: ${breakpoints.tablet}) {
+      max-width: 80%;
+    }
   }
 `

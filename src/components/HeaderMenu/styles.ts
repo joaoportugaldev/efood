@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const HeaderContainer = styled.header`
   width: 100%;
@@ -18,12 +18,25 @@ export const HeaderContainer = styled.header`
     justify-content: space-between;
     align-items: center;
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    height: fit-content;
+    padding: 16px 0;
+
+    nav {
+      flex-direction: column;
+    }
+  }
 `
 export const HeaderLink = styled(Link)`
   text-decoration: none;
   color: ${colors.vermelho};
   font-size: 18px;
   font-weight: 900;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    display: none;
+  }
 `
 
 export const Cart = styled.div`
