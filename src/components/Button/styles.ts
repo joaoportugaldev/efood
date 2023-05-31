@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { colors } from '../../styles'
 import { Props } from '.'
 
-type ButtonProps = Pick<Props, 'width'>
+type ButtonProps = Pick<Props, 'width' | 'marginTop'>
 
 export const ButtonLink = styled(Link)`
   color: ${colors.branco};
@@ -25,4 +25,5 @@ export const ButtonContainer = styled.button<ButtonProps>`
   cursor: pointer;
   border: none;
   width: ${(props) => (props.width === 'full' ? '100%' : 'fit-content')};
+  margin-top: ${(props) => props.marginTop || '0'};
 `

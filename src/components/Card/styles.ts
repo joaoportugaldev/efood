@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, colors } from '../../styles'
+import { colors } from '../../styles'
 import { Props } from '.'
 import { ButtonLink } from '../Button/styles'
 

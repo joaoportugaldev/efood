@@ -7,6 +7,7 @@ export type Props = {
   onClick?: () => void
   children: string | JSX.Element
   width?: 'full' | 'fit'
+  marginTop?: string
 }
 
 export const Button = ({
@@ -15,7 +16,8 @@ export const Button = ({
   to,
   onClick,
   children,
-  width = 'full'
+  width = 'full',
+  marginTop = '0'
 }: Props) => {
   if (type === 'button') {
     return (
@@ -24,6 +26,7 @@ export const Button = ({
         title={title}
         onClick={onClick}
         width={width}
+        marginTop={marginTop}
       >
         {children}
       </ButtonContainer>
