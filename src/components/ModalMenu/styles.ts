@@ -30,8 +30,8 @@ export const Modal = styled.div<ModalProps>`
 export const Box = styled.li`
   z-index: 1;
   position: relative;
-  background-color: ${colors.vermelho};
-  color: ${colors.pessego};
+  background-color: ${colors.red};
+  color: ${colors.peach};
   padding: 32px;
   display: flex;
   gap: 24px;

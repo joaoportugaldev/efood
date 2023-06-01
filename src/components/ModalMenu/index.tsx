@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { closeModal as close } from '../../store/reducers/modal'
-import { add, open } from '../../store/reducers/cart'
-import { Prato } from '../../pages/Home'
-import { formataPreco } from '../../utils'
-
+import { Dish } from '../../pages/Home'
+import { parseToBrl } from '../../utils'
 import { Button } from '../Button'
-import * as S from './styles'
-import closeIcon from '../../assets/images/close.svg'
-import { RootReducer } from '../../store'
 
-export interface ModalProps extends Prato {
+import { closeModal as close } from '../../store/reducers/modal'
+import { RootReducer } from '../../store'
+import { add, open } from '../../store/reducers/cart'
+
+import closeIcon from '../../assets/images/close.svg'
+import * as S from './styles'
+
+export interface ModalProps extends Dish {
   isOpen: boolean
 }
 
@@ -23,9 +24,9 @@ const ModalMenu = () => {
     (state: RootReducer) => state.modal
   )
 
-  const prato = useSelector((state: RootReducer) => state.modal)
+  const dish = useSelector((state: RootReducer) => state.modal)
 
-  const addToCart = () => dispatch(add(prato))
+  const addToCart = () => dispatch(add(dish))
 
   const handleClick = () => {
     addToCart()
@@ -56,7 +57,7 @@ const ModalMenu = () => {
             }}
             width="fit"
           >
-            {`Adicionar ao Carrinho - ${formataPreco(preco)}`}
+            {`Adicionar ao Carrinho - ${parseToBrl(preco)}`}
           </Button>
         </S.About>
       </S.Box>

@@ -3,15 +3,15 @@ import { colors } from '../../styles'
 import { Props } from '.'
 import { ButtonLink } from '../Button/styles'
 
-type CardProps = Pick<Props, 'type'>
+type CardProps = Pick<Props, 'typeDefault'>
 
 export const Card = styled.div<CardProps>`
   position: relative;
   background-color: ${(props) =>
-    props.type === 'restaurant' ? `${colors.branco}` : `${colors.vermelho}`};
+    props.typeDefault ? `${colors.white}` : `${colors.red}`};
   color: ${(props) =>
-    props.type === 'restaurant' ? `${colors.vermelho}` : `${colors.pessego}`};
-  cursor: ${(props) => (props.type === 'restaurant' ? 'auto' : 'pointer')};
+    props.typeDefault ? `${colors.red}` : `${colors.peach}`};
+  cursor: ${(props) => (props.typeDefault ? 'auto' : 'pointer')};
   height: 100%;
 
   ${ButtonLink} {
@@ -28,12 +28,12 @@ export const Image = styled.div<CardProps>`
   background-repeat: no-repeat;
   display: flex;
   justify-content: flex-end;
-  margin: ${(props) => (props.type === 'restaurant' ? '0' : '8px 8px 0px 8px')};
+  margin: ${(props) => (props.typeDefault ? '0' : '8px 8px 0px 8px')};
 `
 
 export const AboutContainer = styled.div`
   padding: 8px;
-  border: 1px solid ${colors.vermelho};
+  border: 1px solid ${colors.red};
   border-top-width: 0;
   height: calc(100% - 217px);
 `

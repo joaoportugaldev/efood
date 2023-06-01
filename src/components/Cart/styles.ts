@@ -28,15 +28,15 @@ export const Sidebar = styled.aside`
   max-width: 360px;
   width: 100%;
   padding: 32px 8px 0px 8px;
-  background-color: ${colors.vermelho};
-  color: ${colors.pessego};
+  background-color: ${colors.red};
+  color: ${colors.peach};
   z-index: 1;
 `
 
 export const Item = styled.li`
   position: relative;
-  background-color: ${colors.pessego};
-  color: ${colors.vermelho};
+  background-color: ${colors.peach};
+  color: ${colors.red};
   display: flex;
   font-size: 14px;
   margin-top: 16px;

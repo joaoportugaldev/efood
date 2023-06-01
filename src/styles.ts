@@ -1,12 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const colors = {
-  pessego: '#FFEBD9',
-  branco: '#FFFFFF',
-  vermelho: '#E66767',
-  amarelo: '#FFB930',
+  peach: '#FFEBD9',
+  white: '#FFFFFF',
+  red: '#E66767',
   skin: '#fff8f2',
-  preto: '#4B4B4B'
+  black: '#4B4B4B'
 }
 
 export const breakpoints = {
@@ -24,8 +23,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${colors.pessego};
-    color: ${colors.vermelho};
+    background-color: ${colors.peach};
+    color: ${colors.red};
   }
 
   .container {

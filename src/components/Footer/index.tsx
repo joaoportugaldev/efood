@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 
-import { StyledFooter } from './styles'
 import logo from '../../assets/images/logo.svg'
 import twitter from '../../assets/images/twitter.svg'
 import instagram from '../../assets/images/instagram.svg'
 import facebook from '../../assets/images/facebook.svg'
+
+import { StyledFooter } from './styles'
 
 const Footer = () => (
   <StyledFooter>

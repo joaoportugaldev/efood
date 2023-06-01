@@ -4,7 +4,7 @@ import { colors } from '../../styles'
 export const StyledFooter = styled.footer`
   height: 298px;
   width: 100%;
-  background-color: ${colors.pessego};
+  background-color: ${colors.peach};
   padding: 40px 0px;
   text-align: center;
   display: flex;

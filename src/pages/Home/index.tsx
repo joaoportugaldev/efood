@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react'
-
 import Header from '../../components/Header'
 import List from '../../components/List'
 import Footer from '../../components/Footer'
 
-import { useGetRestaurantesQuery } from '../../services/api'
+import { useGetRestaurantsQuery } from '../../services/api'
 
-export interface Prato {
+export interface Dish {
   foto: string
   preco: number
   id: number
@@ -15,7 +13,7 @@ export interface Prato {
   porcao: string
 }
 
-export type Restaurante = {
+export type Restaurant = {
   id: number
   titulo: string
   destacado: boolean
@@ -23,20 +21,20 @@ export type Restaurante = {
   avaliacao: number
   descricao: string
   capa: string
-  cardapio: Prato[]
+  cardapio: Dish[]
 }
 
 const Home = () => {
-  const { data: restaurantes, isLoading } = useGetRestaurantesQuery()
+  const { data: restaurants } = useGetRestaurantsQuery()
 
-  if (!restaurantes) {
+  if (!restaurants) {
     return <h3>Carregando...</h3>
   }
 
   return (
     <>
       <Header />
-      <List type="restaurant" restaurantes={restaurantes} />
+      <List defaultList={true} restaurants={restaurants} />
       <Footer />
     </>
   )

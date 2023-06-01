@@ -1,16 +1,18 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '../Button'
-import { add, open } from '../../store/reducers/cart'
+import { Tag } from '../Tag'
+import { Dish } from '../../pages/Home'
+
+import { RootReducer } from '../../store'
+import { add, closeCheckout, open } from '../../store/reducers/cart'
 
 import star from '../../assets/images/estrela.svg'
-import { Tag } from '../Tag'
 import * as S from './styles'
-import { Prato } from '../../pages/Home'
 
 export type Props = {
-  type: 'restaurant' | 'dish'
-  prato?: Prato
+  typeDefault: boolean
+  dish?: Dish
   title: string
   image: string
   rate?: number
@@ -21,8 +23,8 @@ export type Props = {
 }
 
 export const Card = ({
-  type,
-  prato,
+  typeDefault = true,
+  dish,
   title,
   image,
   rate,
@@ -34,10 +36,12 @@ export const Card = ({
   const dispatch = useDispatch()
   const openCart = () => dispatch(open())
   const addToCart = () => {
-    if (prato) {
-      dispatch(add(prato))
+    if (dish) {
+      dispatch(add(dish))
     }
   }
+
+  const { isCheckout } = useSelector((state: RootReducer) => state.cart)
 
   const getDescricao = (descricao: string) => {
     if (descricao.length > 132) {
@@ -55,51 +59,67 @@ export const Card = ({
     }
   }
 
+  const exitCheckout = () => {
+    if (isCheckout) dispatch(closeCheckout())
+  }
+
+  const handleButtonClick = () => {
+    openCart()
+    addToCart()
+    exitCheckout()
+  }
+
   return (
-    <S.Card type={type} onClick={handleCardClick}>
-      <S.Image type={type} style={{ backgroundImage: `url(${image})` }}>
-        {type === 'restaurant' && (
-          <S.Tags>
-            {infos?.map((info) => (
-              <Tag key={info}>{info}</Tag>
-            ))}
-          </S.Tags>
-        )}
-      </S.Image>
-      <S.AboutContainer>
-        {type === 'restaurant' ? (
-          <S.Header>
-            <S.Title>{title}</S.Title>
-            <S.Rate>
-              <S.Title>{rate}</S.Title>
-              <img src={star} alt="Estrela" />
-            </S.Rate>
-          </S.Header>
-        ) : (
-          <S.Title>{title}</S.Title>
-        )}
-        {type === 'restaurant' ? (
-          <S.Description>{description}</S.Description>
-        ) : (
-          <S.Description>{getDescricao(description)}</S.Description>
-        )}
-        {type === 'restaurant' ? (
-          <Button title="Saiba mais" to={`/menu/${id}`} type="link">
-            Saiba mais
-          </Button>
-        ) : (
-          <Button
-            title="Adicionar"
-            type="button"
-            onClick={() => {
-              openCart()
-              addToCart()
-            }}
+    <S.Card typeDefault={typeDefault} onClick={handleCardClick}>
+      {typeDefault ? (
+        <>
+          <S.Image
+            typeDefault={typeDefault}
+            style={{ backgroundImage: `url(${image})` }}
           >
-            Adicionar ao Carrinho
-          </Button>
-        )}
-      </S.AboutContainer>
+            <S.Tags>
+              {infos?.map((info) => (
+                <Tag key={info}>{info}</Tag>
+              ))}
+            </S.Tags>
+          </S.Image>
+          <S.AboutContainer>
+            <S.Header>
+              <S.Title>{title}</S.Title>
+              <S.Rate>
+                <S.Title>{rate}</S.Title>
+                <img src={star} alt="Estrela" />
+              </S.Rate>
+            </S.Header>
+            <S.Description>{description}</S.Description>
+            <Button
+              title={`Clique aqui para abrir o menu do restaurante ${title}`}
+              to={`/menu/${id}`}
+              type="link"
+            >
+              Saiba mais
+            </Button>
+          </S.AboutContainer>
+        </>
+      ) : (
+        <>
+          <S.Image
+            typeDefault={typeDefault}
+            style={{ backgroundImage: `url(${image})` }}
+          />
+          <S.AboutContainer>
+            <S.Title>{title}</S.Title>
+            <S.Description>{getDescricao(description)}</S.Description>
+            <Button
+              title="Adicionar"
+              type="button"
+              onClick={() => handleButtonClick()}
+            >
+              Adicionar ao Carrinho
+            </Button>
+          </S.AboutContainer>
+        </>
+      )}
     </S.Card>
   )
 }

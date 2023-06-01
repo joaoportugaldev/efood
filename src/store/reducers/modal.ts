@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { ModalProps } from '../../components/ModalMenu'
-import { Prato } from '../../pages/Home'
+import { Dish } from '../../pages/Home'
 
 const initialState: ModalProps = {
   nome: '',
@@ -16,7 +16,7 @@ const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    openModal: (state, action: PayloadAction<Prato>) => {
+    openModal: (state, action: PayloadAction<Dish>) => {
       state.nome = action.payload.nome
       state.foto = action.payload.foto
       state.descricao = action.payload.descricao

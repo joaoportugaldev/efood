@@ -45,12 +45,12 @@ export const InputGroup = styled.div<InputGroupProps>`
 
   input,
   textarea {
-    border: 1px solid ${colors.branco};
-    background-color: ${colors.pessego};
+    border: 1px solid ${colors.white};
+    background-color: ${colors.peach};
     padding: 0 8px;
     height: 32px;
     width: 100%;
-    color: ${colors.preto};
+    color: ${colors.black};
     font-size: 14px;
     font-weight: bold;
   }

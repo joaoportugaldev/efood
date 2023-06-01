@@ -15,7 +15,7 @@ export const Container = styled.div<Props>`
   background-repeat: no-repeat;
 
   font-size: 32px;
-  color: ${colors.branco};
+  color: ${colors.white};
 
   .container {
     height: 100%;

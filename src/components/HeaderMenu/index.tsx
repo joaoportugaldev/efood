@@ -2,11 +2,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { open } from '../../store/reducers/cart'
+import { RootReducer } from '../../store'
 
 import logo from '../../assets/images/logo.svg'
 import bgImage from '../../assets/images/bg.png'
-import { HeaderContainer, HeaderLink, Cart } from './styles'
-import { RootReducer } from '../../store'
+
+import * as S from './styles'
 
 const HeaderMenu = () => {
   const dispatch = useDispatch()
@@ -17,19 +18,21 @@ const HeaderMenu = () => {
   }
 
   return (
-    <HeaderContainer style={{ backgroundImage: `url(${bgImage})` }}>
+    <S.HeaderContainer style={{ backgroundImage: `url(${bgImage})` }}>
       <div className="container">
         <nav>
-          <HeaderLink to={'/'}>Restaurantes</HeaderLink>
-          <Link to={'/'}>
+          <S.HeaderLink title="Voltar para a lista de restaurantes" to={'/'}>
+            Restaurantes
+          </S.HeaderLink>
+          <Link title="Voltar para a Home" to={'/'}>
             <img src={logo} alt="Logo" />
           </Link>
-          <Cart onClick={() => openCart()}>
+          <S.Cart onClick={() => openCart()}>
             <span>{items.length} produto(s) no carrinho</span>
-          </Cart>
+          </S.Cart>
         </nav>
       </div>
-    </HeaderContainer>
+    </S.HeaderContainer>
   )
 }
 

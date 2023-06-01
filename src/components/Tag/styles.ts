@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 
 export const StyledTag = styled.button`
-  color: ${colors.branco};
-  background-color: ${colors.vermelho};
+  color: ${colors.white};
+  background-color: ${colors.red};
   font-size: 12px;
   font-weight: bold;
   padding: 6px 4px;

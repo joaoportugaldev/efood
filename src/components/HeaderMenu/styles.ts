@@ -30,7 +30,7 @@ export const HeaderContainer = styled.header`
 `
 export const HeaderLink = styled(Link)`
   text-decoration: none;
-  color: ${colors.vermelho};
+  color: ${colors.red};
   font-size: 18px;
   font-weight: 900;
 
@@ -40,7 +40,7 @@ export const HeaderLink = styled(Link)`
 `
 
 export const Cart = styled.div`
-  color: ${colors.vermelho};
+  color: ${colors.red};
   font-size: 18px;
   font-weight: 900;
   cursor: pointer;

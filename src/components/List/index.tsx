@@ -1,23 +1,24 @@
-import { Restaurante } from '../../pages/Home'
+import { useDispatch } from 'react-redux'
+
+import { Card } from '../Card'
+import ModalMenu from '../ModalMenu'
+import { Restaurant } from '../../pages/Home'
+import { Dish } from '../../pages/Home'
 
 import { openModal } from '../../store/reducers/modal'
 
-import { Card } from '../Card'
 import * as S from './styles'
-import { Prato } from '../../pages/Home'
-import ModalMenu from '../ModalMenu'
-import { useDispatch } from 'react-redux'
 
 export type Props = {
-  type: 'restaurant' | 'menu'
-  restaurantes?: Restaurante[]
-  menu?: Prato[]
+  defaultList: boolean
+  restaurants?: Restaurant[]
+  menu?: Dish[]
 }
 
-const List = ({ restaurantes, type, menu }: Props) => {
+const List = ({ restaurants, menu, defaultList = true }: Props) => {
   const dispatch = useDispatch()
 
-  const getRestauranteTags = (infos: string) => {
+  const getRestaurantTags = (infos: string) => {
     const tags = []
 
     if (infos.length) {
@@ -27,38 +28,38 @@ const List = ({ restaurantes, type, menu }: Props) => {
     return tags
   }
 
-  const setModal = (prato: Prato) => {
-    dispatch(openModal(prato))
+  const setModal = (dish: Dish) => {
+    dispatch(openModal(dish))
   }
 
   return (
     <>
       <S.Section>
-        <S.List type={type} className="container">
-          {type === 'restaurant'
-            ? restaurantes?.map((restaurante) => (
-                <li key={restaurante.id}>
+        <S.List defaultList={defaultList} className="container">
+          {defaultList
+            ? restaurants?.map((restaurant) => (
+                <li key={restaurant.id}>
                   <Card
-                    id={restaurante.id}
-                    type="restaurant"
-                    title={restaurante.titulo}
-                    image={restaurante.capa}
-                    rate={restaurante.avaliacao}
-                    description={restaurante.descricao}
-                    infos={getRestauranteTags(restaurante.tipo)}
+                    id={restaurant.id}
+                    typeDefault={true}
+                    title={restaurant.titulo}
+                    image={restaurant.capa}
+                    rate={restaurant.avaliacao}
+                    description={restaurant.descricao}
+                    infos={getRestaurantTags(restaurant.tipo)}
                   />
                 </li>
               ))
-            : menu?.map((prato) => (
-                <li key={prato.id}>
+            : menu?.map((dish) => (
+                <li key={dish.id}>
                   <Card
-                    id={prato.id}
-                    prato={prato}
-                    type="dish"
-                    title={prato.nome}
-                    image={prato.foto}
-                    description={prato.descricao}
-                    onClick={() => setModal(prato)}
+                    id={dish.id}
+                    dish={dish}
+                    typeDefault={false}
+                    title={dish.nome}
+                    image={dish.foto}
+                    description={dish.descricao}
+                    onClick={() => setModal(dish)}
                   />
                 </li>
               ))}

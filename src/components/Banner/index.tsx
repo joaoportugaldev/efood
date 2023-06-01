@@ -1,4 +1,4 @@
-import { Category, Container, Title } from './styles'
+import * as S from './styles'
 
 export type BannerProps = {
   title: string
@@ -7,10 +7,10 @@ export type BannerProps = {
 }
 
 export const Banner = ({ title, category, bgImage }: BannerProps) => (
-  <Container bgImage={bgImage}>
+  <S.Container bgImage={bgImage}>
     <div className="container">
-      <Category>{category}</Category>
-      <Title>{title}</Title>
+      <S.Category>{category}</S.Category>
+      <S.Title>{title}</S.Title>
     </div>
-  </Container>
+  </S.Container>
 )

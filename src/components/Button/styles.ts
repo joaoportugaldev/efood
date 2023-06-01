@@ -7,8 +7,8 @@ import { Props } from '.'
 type ButtonProps = Pick<Props, 'width' | 'marginTop'>
 
 export const ButtonLink = styled(Link)`
-  color: ${colors.branco};
-  background-color: ${colors.vermelho};
+  color: ${colors.white};
+  background-color: ${colors.red};
   font-size: 14px;
   font-weight: bold;
   padding: 4px 6px;
@@ -17,8 +17,8 @@ export const ButtonLink = styled(Link)`
 `
 
 export const ButtonContainer = styled.button<ButtonProps>`
-  color: ${colors.vermelho};
-  background-color: ${colors.pessego};
+  color: ${colors.red};
+  background-color: ${colors.peach};
   font-size: 14px;
   font-weight: bold;
   padding: 4px;
