@@ -53,6 +53,10 @@ export const InputGroup = styled.div<InputGroupProps>`
     color: ${colors.black};
     font-size: 14px;
     font-weight: bold;
+
+    &.error {
+      border: 2px solid red;
+    }
   }
 
   textarea {

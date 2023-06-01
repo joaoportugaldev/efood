@@ -22,6 +22,14 @@ const Cart = () => {
   const removeItem = (id: number) => dispatch(remove(id))
   const goCheckout = () => dispatch(openCheckout())
 
+  const handleClick = () => {
+    if (items.length === 0) {
+      closeCart()
+    } else {
+      goCheckout()
+    }
+  }
+
   return (
     <S.CartContainer className={isOpen ? 'is-open' : ''}>
       <div className="overlay" onClick={() => closeCart()}></div>
@@ -50,7 +58,7 @@ const Cart = () => {
               type="button"
               title="Clique para continuar a compra"
               width="full"
-              onClick={() => goCheckout()}
+              onClick={handleClick}
             >
               Continuar com a compra
             </Button>

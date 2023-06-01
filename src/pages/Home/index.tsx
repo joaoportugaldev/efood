@@ -1,6 +1,7 @@
 import Header from '../../components/Header'
 import List from '../../components/List'
 import Footer from '../../components/Footer'
+import { Loader } from '../../components/Loader'
 
 import { useGetRestaurantsQuery } from '../../services/api'
 
@@ -25,16 +26,16 @@ export type Restaurant = {
 }
 
 const Home = () => {
-  const { data: restaurants } = useGetRestaurantsQuery()
-
-  if (!restaurants) {
-    return <h3>Carregando...</h3>
-  }
+  const { data: restaurants, isLoading } = useGetRestaurantsQuery()
 
   return (
     <>
       <Header />
-      <List defaultList={true} restaurants={restaurants} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <List defaultList={true} restaurants={restaurants} />
+      )}
       <Footer />
     </>
   )

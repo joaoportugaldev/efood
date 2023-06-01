@@ -113,12 +113,12 @@ const Checkout = () => {
     cleanCart()
   }
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
+  const checkInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched
     const isInvalid = fieldName in form.errors
+    const hasError = isTouched && isInvalid
 
-    if (isTouched && isInvalid) return message
-    return ''
+    return hasError
   }
 
   return (
@@ -158,10 +158,8 @@ const Checkout = () => {
                   value={form.values.destinatario}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('destinatario') ? 'error' : ''}
                 />
-                <small>
-                  {getErrorMessage('destinatario', form.errors.destinatario)}
-                </small>
               </S.InputGroup>
               <S.InputGroup>
                 <label htmlFor="endereco">Endereço</label>
@@ -172,10 +170,8 @@ const Checkout = () => {
                   value={form.values.endereco}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('endereco') ? 'error' : ''}
                 />
-                <small>
-                  {getErrorMessage('endereco', form.errors.endereco)}
-                </small>
               </S.InputGroup>
               <S.InputGroup>
                 <label htmlFor="cidade">Cidade</label>
@@ -186,8 +182,8 @@ const Checkout = () => {
                   value={form.values.cidade}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('cidade') ? 'error' : ''}
                 />
-                <small>{getErrorMessage('cidade', form.errors.cidade)}</small>
               </S.InputGroup>
               <div className="number-inputs">
                 <S.InputGroup maxWidth="155px">
@@ -199,8 +195,8 @@ const Checkout = () => {
                     value={form.values.cep}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('cep') ? 'error' : ''}
                   />
-                  <small>{getErrorMessage('cep', form.errors.cep)}</small>
                 </S.InputGroup>
                 <S.InputGroup maxWidth="155px">
                   <label htmlFor="numero">Número</label>
@@ -211,8 +207,8 @@ const Checkout = () => {
                     value={form.values.numero}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('numero') ? 'error' : ''}
                   />
-                  <small>{getErrorMessage('numero', form.errors.numero)}</small>
                 </S.InputGroup>
               </div>
               <S.InputGroup>
@@ -223,10 +219,8 @@ const Checkout = () => {
                   value={form.values.complemento}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('complemento') ? 'error' : ''}
                 />
-                <small>
-                  {getErrorMessage('complemento', form.errors.complemento)}
-                </small>
               </S.InputGroup>
               <Button
                 type="button"
@@ -262,8 +256,8 @@ const Checkout = () => {
                   value={form.values.nome}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
+                  className={checkInputHasError('nome') ? 'error' : ''}
                 />
-                <small>{getErrorMessage('nome', form.errors.nome)}</small>
               </S.InputGroup>
               <div className="number-inputs">
                 <S.InputGroup maxWidth="228px">
@@ -275,13 +269,10 @@ const Checkout = () => {
                     value={form.values.numeroNoCartao}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={
+                      checkInputHasError('numeroNoCartao') ? 'error' : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage(
-                      'numeroNoCartao',
-                      form.errors.numeroNoCartao
-                    )}
-                  </small>
                 </S.InputGroup>
                 <S.InputGroup maxWidth="87px">
                   <label htmlFor="cvv">CVV</label>
@@ -292,8 +283,8 @@ const Checkout = () => {
                     value={form.values.cvv}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('cvv') ? 'error' : ''}
                   />
-                  <small>{getErrorMessage('cvv', form.errors.cvv)}</small>
                 </S.InputGroup>
               </div>
               <div className="number-inputs">
@@ -306,13 +297,10 @@ const Checkout = () => {
                     value={form.values.mesDeVencimento}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={
+                      checkInputHasError('mesDeVencimento') ? 'error' : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage(
-                      'mesDeVencimento',
-                      form.errors.mesDeVencimento
-                    )}
-                  </small>
                 </S.InputGroup>
                 <S.InputGroup maxWidth="155px">
                   <label htmlFor="anoDeVencimento">Ano de Vencimento</label>
@@ -323,13 +311,10 @@ const Checkout = () => {
                     value={form.values.anoDeVencimento}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={
+                      checkInputHasError('anoDeVencimento') ? 'error' : ''
+                    }
                   />
-                  <small>
-                    {getErrorMessage(
-                      'anoDeVencimento',
-                      form.errors.anoDeVencimento
-                    )}
-                  </small>
                 </S.InputGroup>
               </div>
               <Button
