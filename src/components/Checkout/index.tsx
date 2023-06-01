@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import InputMask from 'react-input-mask'
 
 import { Button } from '../Button'
 
@@ -25,21 +26,20 @@ const Checkout = () => {
 
   const exitCheckout = () => dispatch(closeCheckout())
   const closeCart = () => dispatch(close())
-  const cleanCart = () => dispatch(clean())
 
   const form = useFormik({
     initialValues: {
       destinatario: '',
       endereco: '',
       cidade: '',
-      cep: 0,
-      numero: 0,
+      cep: '',
+      numero: '',
       complemento: '',
       nome: '',
-      numeroNoCartao: 0,
-      cvv: 0,
-      mesDeVencimento: 0,
-      anoDeVencimento: 0
+      numeroNoCartao: '',
+      cvv: '',
+      mesDeVencimento: '',
+      anoDeVencimento: ''
     },
     validationSchema: Yup.object({
       destinatario: Yup.string()
@@ -52,8 +52,7 @@ const Checkout = () => {
         .min(5, 'Cidade inválida')
         .required('O campo é obrigatório'),
       cep: Yup.string()
-        .min(8, 'CEP inválido')
-        .max(8, 'CEP inválido')
+        .max(9, 'CEP inválido')
         .required('O campo é obrigatório'),
       numero: Yup.string().required('O campo é obrigatório'),
       complemento: Yup.string(),
@@ -61,44 +60,44 @@ const Checkout = () => {
         .min(3, 'O nome precisa ter pelo menos 3 caracteres')
         .required('O campo é obrigatório'),
       numeroNoCartao: Yup.string()
-        .min(3, 'O nome precisa ter pelo menos 3 caracteres')
+        .min(18, 'Número de cartão inválido')
+        .max(19, 'Número de cartão inválido')
         .required('O campo é obrigatório'),
       cvv: Yup.string()
-        .min(3, 'O nome precisa ter pelo menos 3 caracteres')
+        .min(3, 'O CVV deve ter pelo menos 3 caracteres')
         .required('O campo é obrigatório'),
       mesDeVencimento: Yup.string()
-        .min(3, 'O nome precisa ter pelo menos 3 caracteres')
+        .min(2, 'Mês inválido')
         .required('O campo é obrigatório'),
       anoDeVencimento: Yup.string()
-        .min(3, 'O nome precisa ter pelo menos 3 caracteres')
+        .min(4, 'Ano inválido')
+        .max(4, 'Ano inválido')
         .required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
       purchase({
-        products: [
-          {
-            id: 1,
-            price: 0
-          }
-        ],
+        products: items.map((item) => ({
+          id: item.id,
+          price: item.preco
+        })),
         delivery: {
           receiver: values.destinatario,
           address: {
             description: values.endereco,
             city: values.cidade,
             zipCode: `${values.cep}`,
-            number: 12,
+            number: Number(values.numero),
             complement: values.complemento
           }
         },
         payment: {
           card: {
             name: values.nome,
-            number: `${values.numeroNoCartao}`,
-            code: values.cvv,
+            number: values.numeroNoCartao,
+            code: Number(values.cvv),
             expires: {
-              month: 12,
-              year: 1234
+              month: Number(values.mesDeVencimento),
+              year: Number(values.anoDeVencimento)
             }
           }
         }
@@ -106,11 +105,16 @@ const Checkout = () => {
     }
   })
 
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clean())
+    }
+  }, [isSuccess, dispatch])
+
   const handleFinishButton = () => {
     setStep(enums.Checkout.ADDRESS)
     exitCheckout()
     closeCart()
-    cleanCart()
   }
 
   const checkInputHasError = (fieldName: string) => {
@@ -188,20 +192,21 @@ const Checkout = () => {
               <div className="number-inputs">
                 <S.InputGroup maxWidth="155px">
                   <label htmlFor="cep">CEP</label>
-                  <input
-                    type="number"
+                  <InputMask
+                    type="text"
                     id="cep"
                     name="cep"
                     value={form.values.cep}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError('cep') ? 'error' : ''}
+                    mask={'99999.999'}
                   />
                 </S.InputGroup>
                 <S.InputGroup maxWidth="155px">
                   <label htmlFor="numero">Número</label>
                   <input
-                    type="number"
+                    type="text"
                     id="numero"
                     name="numero"
                     value={form.values.numero}
@@ -262,8 +267,8 @@ const Checkout = () => {
               <div className="number-inputs">
                 <S.InputGroup maxWidth="228px">
                   <label htmlFor="numeroNoCartao">Número no cartão</label>
-                  <input
-                    type="number"
+                  <InputMask
+                    type="text"
                     id="numeroNoCartao"
                     name="numeroNoCartao"
                     value={form.values.numeroNoCartao}
@@ -272,26 +277,28 @@ const Checkout = () => {
                     className={
                       checkInputHasError('numeroNoCartao') ? 'error' : ''
                     }
+                    mask={'9999 9999 9999 9999'}
                   />
                 </S.InputGroup>
                 <S.InputGroup maxWidth="87px">
                   <label htmlFor="cvv">CVV</label>
-                  <input
-                    type="number"
+                  <InputMask
+                    type="text"
                     id="cvv"
                     name="cvv"
                     value={form.values.cvv}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError('cvv') ? 'error' : ''}
+                    mask={'999'}
                   />
                 </S.InputGroup>
               </div>
               <div className="number-inputs">
                 <S.InputGroup maxWidth="155px">
                   <label htmlFor="mesDeVencimento">Mês de vencimento</label>
-                  <input
-                    type="number"
+                  <InputMask
+                    type="text"
                     id="mesDeVencimento"
                     name="mesDeVencimento"
                     value={form.values.mesDeVencimento}
@@ -300,12 +307,13 @@ const Checkout = () => {
                     className={
                       checkInputHasError('mesDeVencimento') ? 'error' : ''
                     }
+                    mask={'99'}
                   />
                 </S.InputGroup>
                 <S.InputGroup maxWidth="155px">
                   <label htmlFor="anoDeVencimento">Ano de Vencimento</label>
-                  <input
-                    type="number"
+                  <InputMask
+                    type="text"
                     id="anoDeVencimento"
                     name="anoDeVencimento"
                     value={form.values.anoDeVencimento}
@@ -314,6 +322,7 @@ const Checkout = () => {
                     className={
                       checkInputHasError('anoDeVencimento') ? 'error' : ''
                     }
+                    mask={'9999'}
                   />
                 </S.InputGroup>
               </div>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const CartContainer = styled.div`
   position: fixed;
@@ -36,6 +36,10 @@ export const Sidebar = styled.aside`
     font-size: 14px;
     line-height: 22px;
     text-align: center;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    max-width: 300px;
   }
 `
 
