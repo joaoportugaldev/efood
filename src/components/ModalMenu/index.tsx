@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Dish } from '../../pages/Home'
 import { parseToBrl } from '../../utils'
 import { Button } from '../Button'
 

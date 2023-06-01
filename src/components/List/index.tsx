@@ -2,8 +2,6 @@ import { useDispatch } from 'react-redux'
 
 import { Card } from '../Card'
 import ModalMenu from '../ModalMenu'
-import { Restaurant } from '../../pages/Home'
-import { Dish } from '../../pages/Home'
 
 import { openModal } from '../../store/reducers/modal'
 

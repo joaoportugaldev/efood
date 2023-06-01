@@ -18,7 +18,7 @@ import * as S from './styles'
 const Checkout = () => {
   const [step, setStep] = useState(enums.Checkout.ADDRESS)
 
-  const [purchase, { data, isSuccess }] = usePurchaseMutation()
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
 
   const dispatch = useDispatch()
   const { items } = useSelector((state: RootReducer) => state.cart)
@@ -123,7 +123,7 @@ const Checkout = () => {
 
   return (
     <>
-      {isSuccess ? (
+      {isSuccess && data ? (
         <S.Container>
           <h2>Pedido realizado - {data.orderId}</h2>
           <p>
@@ -325,8 +325,9 @@ const Checkout = () => {
                 onClick={() => {
                   form.handleSubmit()
                 }}
+                disabled={isLoading}
               >
-                Finalizar Pagamento
+                {isLoading ? 'Finalizando pagamento...' : 'Finalizar pagamento'}
               </Button>
               <Button
                 type="button"
@@ -334,6 +335,7 @@ const Checkout = () => {
                 width="full"
                 marginTop="8px"
                 onClick={() => setStep(enums.Checkout.ADDRESS)}
+                disabled={isLoading}
               >
                 Voltar para a edição de endereço
               </Button>

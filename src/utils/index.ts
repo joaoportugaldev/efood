@@ -1,5 +1,3 @@
-import { Dish } from '../pages/Home'
-
 export const parseToBrl = (amount: number) => {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',

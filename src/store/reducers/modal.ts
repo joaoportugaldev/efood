@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { ModalProps } from '../../components/ModalMenu'
-import { Dish } from '../../pages/Home'
 
 const initialState: ModalProps = {
   nome: '',

@@ -31,6 +31,12 @@ export const Sidebar = styled.aside`
   background-color: ${colors.red};
   color: ${colors.peach};
   z-index: 1;
+
+  .empty_cart-text {
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+  }
 `
 
 export const Item = styled.li`

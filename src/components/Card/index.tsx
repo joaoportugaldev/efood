@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from '../Button'
 import { Tag } from '../Tag'
-import { Dish } from '../../pages/Home'
 
 import { RootReducer } from '../../store'
 import { add, closeCheckout, open } from '../../store/reducers/cart'
