@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+# EFood
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Projeto feito tomando como base o projeto [EPlay](https://github.com/ogiansouza/eplay) do curso Desenvolvedor Full Stack Python da EBAC na aula Fazendo um e-commerce
 
-## Available Scripts
+<p align="center">
+  <img alt="Logo do projeto" src="./src/assets/images/logo.svg" />
+</p>
 
-In the project directory, you can run:
+# About the Project/Sobre o projeto
 
-### `npm start`
+Trata-se de um aplicativo de entrega de alimentos, onde os usuários podem fazer pedidos de restaurantes locais e receber a entrega em sua casa. O projeto é desenvolvido por João Portugal e tem como objetivo fornecer uma solução conveniente para pedidos de comida online.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Funcionalidades
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Navegação entre páginas
+- Adicionar itens ao carrinho de compras
+- Processo de checkout 
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tecnologias utilizadas
 
-### `npm run build`
+- Framework utilizado: React
+- React Redux:
+    - Centralizar o gerenciamento de estado
+- React Router Dom: 
+    - Gerenciar a navageção entre as rotas
+- React Spinners: 
+    - Inserir animação de carregamento durante a requisição assíncrona
+- React Input Mask: 
+    - Inserir máscara nos campos do formulário e garantir a inserção de dados correta pelo usuário
+- Formik: 
+    - Simplificar a lógica de validação dos formulário
+- Yup: 
+    - Gerenciar o estado dos inputs e trabalhar junto ao formik no processo de validação
+- Styled Components: 
+    - Criar componentes estilizados
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Requisitos para rodar o projeto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Node.js (versão 12 ou superior)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Setup do ambiente
 
-### `npm run eject`
+- NPM
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Estrutura do projeto
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `./pages`: É pasta geral que reuni os arquivos utilizados para montar as rotas pelo React-Router-Dom
+- `./router.tsx`: É o arquivo de configuração das rotas do react-router-dom
+- `./src/components`: Estão todos os componentes do projeto
+- `./src/utils`: Disponibiliza utilitários que exportados para serem utilizados em mais de uma parte da aplicação, por exemplo:
+  - `parseToBrl(amount)`: Uma função para formatar os valores para a moeda brasileira
+  - `getTotalPrice(items)`: Uma função para calcular o valor total no carrinho através do método Reduce
+- `./src/services`: Configura as queries para a [API](https://fake-api-tau.vercel.app/api/efood/restaurantes) utilizando o Redux Toolkit Query
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Configuração
+- Clone este repositório em sua máquina local usando o comando git clone https://github.com/joaosportugal/project_efood.git.
+- Navegue até o diretório raiz do projeto: cd project_efood.
+- Instale as dependências do projeto executando npm install ou yarn install.
+- Inicie o servidor de desenvolvimento executando npm start ou yarn start.
+- Abra o navegador e acesse http://localhost:3000 para visualizar o aplicativo.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Contribuição
+Contribuições são bem-vindas! Se você deseja contribuir para o projeto, siga as etapas abaixo:
 
-## Learn More
+- Faça um fork deste repositório.
+- Crie uma nova branch com o nome descritivo da sua contribuição: git checkout -b minha-contribuicao.
+- Faça as alterações necessárias e faça commit das suas alterações: git commit -m "Minha contribuição".
+- Envie suas alterações para o repositório remoto: git push origin minha-contribuicao.
+- Abra um pull request no repositório original.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Licença
+Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para obter mais detalhes.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contato
+Se você tiver alguma dúvida ou sugestão sobre o projeto, sinta-se à vontade para entrar em contato comigo por meio do email portugalestudio@gmail.com
